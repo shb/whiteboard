@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Whiteboard</title>
+    <link rel="stylesheet" href="whiteboard.css">
+</head>
+<body>
+<div class="container flex vertical" id="page">
+    <div id="header">
+        <h1>Whiteboard</h1>
+    </div>
+    <div class="flex grow" id="board-frame">
+        <canvas id="board" width="800" height="800">Nothing to see here :(</canvas>
+    </div>
+</div>
+<div id="console"></div>
+</body>
+
+
+<script src="js/color-hash.js"></script>
+<script src="js/whiteboard.js"></script>
+<script>
+    const debug = location.search === '?debug' ? (new DebugConsole(document.getElementById('console'))) : (new DummyConsole)
+
+    try {
+        new ConsoleTap({
+            source: console,
+            dest: debug
+        })
+    } catch (err) {
+        console.error(err)
+    }
+
+    try {
+        const client = new Client({
+            console: debug,
+            url: 'wss://lit-hollows-77290.herokuapp.com'
+        })
+
+        const boardInput = new BoardInput({
+            board: document.getElementById('board'),
+            console: debug,
+            client
+        })
+
+        new BoardDrawer({
+            board: document.getElementById('board'),
+            client,
+            input: boardInput
+        })
+    } catch (err) {
+        debug.error(err)
+    }
+</script>
+
+</html>

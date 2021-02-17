@@ -1,11 +1,20 @@
+const {resolve} = require('path')
+const express = require('express')
 const WebSocket = require('ws')
 
+const PORT = process.env.PORT || 8080
+
+const server = express()
+    .use(express.static(resolve(__dirname, '..', 'client')))
+    .listen(PORT, () => console.log(`Listening on ${PORT}`))
+
 const wsServer = new WebSocket.Server({
-    port: 8080
+    server
 })
 
 wsServer.on('connection', onWsConnection)
-function onWsConnection (socket) {
+
+function onWsConnection(socket) {
     const client = new Client({
         server: wsServer,
         socket
