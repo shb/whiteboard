@@ -1,0 +1,10 @@
+{
+  "name": "whiteboard",
+  "version": "0.0.1",
+  "description": "Collaborative whiteboard",
+  "main": "index.js",
+  "author": "Simone Cociancich",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["client", "server"]
+}

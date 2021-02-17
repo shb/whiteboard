@@ -1,0 +1,16 @@
+{
+  "name": "whiteboard-server",
+  "version": "0.0.1",
+  "description": "Whiteboard server module",
+  "main": "whiteboard.js",
+  "author": "Simone Cociancich",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node whiteboard.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "ws": "^7.4.3"
+  }
+}
