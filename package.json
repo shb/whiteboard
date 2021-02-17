@@ -6,5 +6,8 @@
   "author": "Simone Cociancich",
   "license": "MIT",
   "private": true,
-  "workspaces": ["client", "server"]
+  "workspaces": ["client", "server"],
+  "scripts": {
+    "start": "cd server && yarn start"
+  }
 }
