@@ -31,7 +31,6 @@ class Client {
     }
 
     onWsMessage = (message) => {
-        console.dir(message)
         this.server.clients.forEach(client => {
             if (client === this.socket) return
             if (client.readyState !== WebSocket.OPEN) return

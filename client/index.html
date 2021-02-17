@@ -21,26 +21,25 @@
 <script src="js/color-hash.js"></script>
 <script src="js/whiteboard.js"></script>
 <script>
-    const debug = location.search === '?debug' ? (new DebugConsole(document.getElementById('console'))) : (new DummyConsole)
-
-    try {
-        new ConsoleTap({
-            source: console,
-            dest: debug
-        })
-    } catch (err) {
-        console.error(err)
+    if (location.search === '?debug') {
+        try {
+            const debug = new DebugConsole(document.getElementById('console'))
+            new ConsoleTap({
+                source: window.console,
+                dest: debug
+            })
+        } catch (err) {
+            console.error(err)
+        }
     }
 
     try {
         const client = new Client({
-            console: debug,
             url: 'wss://lit-hollows-77290.herokuapp.com'
         })
 
         const boardInput = new BoardInput({
             board: document.getElementById('board'),
-            console: debug,
             client
         })
 
@@ -50,7 +49,7 @@
             input: boardInput
         })
     } catch (err) {
-        debug.error(err)
+        console.error(err)
     }
 </script>
 

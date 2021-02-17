@@ -1,11 +1,5 @@
 'use strict';
 
-class DummyConsole {
-    log (text) {}
-
-    write() {}
-}
-
 class DebugConsole {
     _buffer = []
     _element = undefined
@@ -56,7 +50,7 @@ class ConsoleTap {
 
 class BoardInput {
     board = null
-    console = null
+    console = window.console
     client = null
 
     minX = 0
@@ -198,13 +192,12 @@ class DrawingEvent {
 
 class Client {
     buffer = []
-    console = null
+    console = window.console
     url = null
     socket = null
 
     constructor(props) {
         Object.assign(this, props)
-        this.console = this.console || console
         this.socket = this.socket || new WebSocket(this.url)
         this.socket.onmessage = this.onMessage
     }
